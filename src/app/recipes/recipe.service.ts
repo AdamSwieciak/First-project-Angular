@@ -14,7 +14,7 @@ export class RecipeService {
       new Ingredient('Meat', 1),
       new Ingredient ('salad', 3)
     ] ),
-    new Recipe('PAsta', 'this is', 'https://hips.hearstapps.com/delish/assets/17/36/1504715566-delish-fettuccine-alfredo.jpg', [
+    new Recipe('Pasta', 'this is', 'https://hips.hearstapps.com/delish/assets/17/36/1504715566-delish-fettuccine-alfredo.jpg', [
       new Ingredient('Ham', 5),
       new Ingredient('Chees', 1) 
     ] )
@@ -24,6 +24,10 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice()
+  }
+
+  getRecipe(index: number) {
+    return this.recipes[index]
   }
 
   adNewIngredients(ingredients: Ingredient[]) {
