@@ -10,16 +10,18 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>()
 
-  private recipes: Recipe[] =[
-    new Recipe('Pizza', 'this is', 'https://s3.przepisy.pl/przepisy3ii/img/variants/800x0/pizza-grecka.jpg', [
-      new Ingredient('Meat', 1),
-      new Ingredient ('salad', 3)
-    ] ),
-    new Recipe('Pasta', 'this is', 'https://hips.hearstapps.com/delish/assets/17/36/1504715566-delish-fettuccine-alfredo.jpg', [
-      new Ingredient('Ham', 5),
-      new Ingredient('Chees', 1) 
-    ] )
-  ];
+  // private recipes: Recipe[] =[
+  //   new Recipe('Pizza', 'this is', 'https://s3.przepisy.pl/przepisy3ii/img/variants/800x0/pizza-grecka.jpg', [
+  //     new Ingredient('Meat', 1),
+  //     new Ingredient ('salad', 3)
+  //   ] ),
+  //   new Recipe('Pasta', 'this is', 'https://hips.hearstapps.com/delish/assets/17/36/1504715566-delish-fettuccine-alfredo.jpg', [
+  //     new Ingredient('Ham', 5),
+  //     new Ingredient('Chees', 1) 
+  //   ] )
+  // ];
+
+  private recipes: Recipe[] = []
 
   constructor(private shoppingService: ShoppingListService) { }
 
@@ -47,6 +49,11 @@ export class RecipeService {
 
   deleteRecipes(id: number) {
     this.recipes.splice(id, 1);
+    this.recipesChanged.next(this.recipes.slice())
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes
     this.recipesChanged.next(this.recipes.slice())
   }
 
