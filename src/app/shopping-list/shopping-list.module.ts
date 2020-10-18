@@ -14,7 +14,7 @@ import { ShoppingListComponent } from "./shopping-list.component";
     ],
     imports: [
         RouterModule.forChild([
-            {path: 'shoppingList', component: ShoppingListComponent}
+            {path: '', component: ShoppingListComponent}
         ]),
         SharedModule,
         ReactiveFormsModule,
