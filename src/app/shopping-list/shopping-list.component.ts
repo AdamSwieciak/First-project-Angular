@@ -1,11 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { LoggingService } from '../logging.service';
 import { Ingredient} from '../shared/ingredient.model'
-import { ShoppingListService } from './shopping-list.service';
-import * as fromShoppingList from './store/shopping-list.reducer'
 import * as ShoppingListActions  from './store/shopping-list.actions'
+import * as fromApp from '../store/app.reducer'
 
 @Component({
   selector: 'app-shopping-list',
@@ -17,12 +15,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   private ingChange: Subscription
 
   constructor(
-    private store: Store<fromShoppingList.AppState>
+    private store: Store<fromApp.AppState>
     ) { }
 
   ngOnInit() {
     this.ingredients = this.store.select('shoppingList')
-    console.log(this.ingredients)
     // this.ingredients=this.shoppingService.onGetData();
     // this.ingChange = this.shoppingService.ingrediensChanged.subscribe(
     //   (ingredients: Ingredient[]) => {

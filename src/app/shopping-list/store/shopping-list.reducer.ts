@@ -7,10 +7,6 @@ import * as ShoppingListActions  from './shopping-list.actions'
         editIngredientIndex: number
     }
 
-    export interface AppState {
-        shoppingList: State
-    }
-
     const initialState: State = {
     ingredients: [
         new Ingredient('Aples', 5),
@@ -44,15 +40,12 @@ import * as ShoppingListActions  from './shopping-list.actions'
         case ShoppingListActions.UPDATE_INGREDIENT:
 
             const ingredient = state.ingredients[state.editIngredientIndex]
-            console.log(ingredient)
             const updateIngredient = {
                 ...action.payload
             }
-            console.log(updateIngredient)
             const updatedIngredients = [...state.ingredients]
-            console.log(updatedIngredients)
             updatedIngredients[state.editIngredientIndex] = updateIngredient
-            console.log(updatedIngredients)
+
 
             return {
                 ...state,
