@@ -4,10 +4,9 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import {Recipe} from '../recipe.module'
-import { RecipeService } from '../recipe.service';
+import {Recipe} from '../recipe.model'
 import * as fromApp from '../../store/app.reducer'
-// import * as RecipesAction from '../recipes/store/recipe.action'
+
 
 @Component({
   selector: 'app-recipe-list',

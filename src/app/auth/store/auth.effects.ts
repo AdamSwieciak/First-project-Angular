@@ -33,7 +33,9 @@ const handleAuthentication = (
         email: email, 
         userId: userId, 
         token: token, 
-        expirationDate: expirationDate})
+        expirationDate: expirationDate,
+        redirect: true
+    })
 }
 
 const handleError = (errorRes: any) => {
@@ -95,7 +97,8 @@ export class AuthEffects {
         ofType(AuthAction.LOGIN_START),
         switchMap((authData: AuthAction.LoginStart) => {
             return this.http.post<AuthResponseData>(
-                'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey,
+                'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' 
+                + environment.firebaseAPIKey,
             {
                 email: authData.payload.email,
                 password: authData.payload.password,
@@ -122,8 +125,10 @@ export class AuthEffects {
         @Effect({dispatch: false})
         authRedirected = this.actions$.pipe(
             ofType(AuthAction.AUTHENTICATE_SUCESS), 
-            tap(() => {
+            tap((authSucessAction: AuthAction.AuthenticateSucess) => {
+                if (authSucessAction.payload.redirect) {
                     this.router.navigate(['/']);
+                }
                 }
             )
         )
@@ -160,7 +165,8 @@ export class AuthEffects {
                             email: loadedUser.email,
                             userId: loadedUser.id,
                             token: loadedUser.token,
-                            expirationDate: new Date(userData._tokenExpirationData)
+                            expirationDate: new Date(userData._tokenExpirationData),
+                            redirect: false
     
                         })
                         // const expirationDuration = 

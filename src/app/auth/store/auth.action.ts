@@ -18,6 +18,7 @@ export const AUTO_LOGIN = '[AUTH] AUTO_LOGIN'
             userId: string; 
             token: string; 
             expirationDate: Date;
+            redirect: boolean
             }) {}
     }
 
